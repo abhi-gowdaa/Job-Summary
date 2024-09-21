@@ -1,5 +1,5 @@
-git clone or download zip file
-https://github.com/abhi-gowdaa/Job-Summary.git
+git clone https://github.com/abhi-gowdaa/Job-Summary.git
+or download zip file
 
 cd to main folder
 
