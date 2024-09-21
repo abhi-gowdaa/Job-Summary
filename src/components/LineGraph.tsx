@@ -49,7 +49,7 @@ const LineGraph = ({ dataSource }: LineGraphProps) => {
   const config = {
     data: transformedData,
     height: 250,
-    width: 400,
+    width: 500,
     xField: "year",
     yField: "avg_salary",
     
@@ -65,7 +65,7 @@ const LineGraph = ({ dataSource }: LineGraphProps) => {
     //       fill: 'white', 
     //     },
     //   },
-    
+         
         colorField:"#5c5",
         color:"#fff",
         axis: {
