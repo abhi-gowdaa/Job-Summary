@@ -1,7 +1,7 @@
 import { Line } from "@ant-design/charts";
 import { DataSource } from "../modal";
- import './LineGraph.css'
- 
+import "./LineGraph.css";
+
 type LineGraphProps = {
   dataSource: DataSource[];
 };
@@ -26,25 +26,12 @@ const LineGraph = ({ dataSource }: LineGraphProps) => {
     dictionary[parseInt(years[i])] = count / noOf;
   }
 
-
-//   const dataa = [
-//     { year: '1991', value: 3 },
-//     { year: '1992', value: 4 },
-//     { year: '1993', value: 3.5 },
-//     { year: '1994', value: 5 },
-//     { year: '1995', value: 4.9 },
-//     { year: '1996', value: 6 },
-//     { year: '1997', value: 7 },
-//     { year: '1998', value: 9 },
-//     { year: '1999', value: 13 },
-//   ];
-
   const transformedData = Object.entries(dictionary).map(([year, value]) => ({
     year: year,
     avg_salary: value,
   }));
 
-  console.log(transformedData,"hi");
+  console.log(transformedData, "hi");
 
   const config = {
     data: transformedData,
@@ -52,7 +39,7 @@ const LineGraph = ({ dataSource }: LineGraphProps) => {
     width: 500,
     xField: "year",
     yField: "avg_salary",
-    
+
     smooth: true,
     point: {
       size: 5,
@@ -62,23 +49,27 @@ const LineGraph = ({ dataSource }: LineGraphProps) => {
     //     visible: true,
     //     position: "top",
     //     style: {
-    //       fill: 'white', 
+    //       fill: 'white',
     //     },
     //   },
-         
-        colorField:"#5c5",
-        color:"#fff",
-        axis: {
-            x: {title:"Year                          ",titleFill:"white", labelFill: '#ffff' },
-            y: { title:"Salary", titleFill:"white",labelFill: '#fff' },
-        }
-      
-       
+
+    colorField: "#5c5",
+    color: "#fff",
+    axis: {
+      x: {
+        title: "Year                          ",
+        titleFill: "white",
+        labelFill: "#ffff",
+      },
+      y: { title: "Salary (in USD)", titleFill: "white", labelFill: "#fff" },
+    },
   };
-  return <div className="chart-container">
-    <h2>Salary Average per year</h2>
-  <Line {...config} />
-</div>;
+  return (
+    <div className="chart-container">
+      <h2>Salary Average per year</h2>
+      <Line {...config} />
+    </div>
+  );
 };
 
 export default LineGraph;
