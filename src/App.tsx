@@ -9,25 +9,25 @@ import MainTable from './MainTable';
 
 function App() {
   const [data, setData] = useState<Csvtype[]>([]); 
-  const { readString } = usePapaParse();
+  const { readRemoteFile } = usePapaParse();
  
   useEffect(() => {
     const fetchCsv = async () => {
-      const response = await fetch('/src/assets/salaries.csv'); 
-      const csvText = await response.text();
- 
-      readString(csvText, {
-        header: true,      
-        complete: (result) => {
-          const parsedData = result.data as Csvtype[];  
+      readRemoteFile('https://raw.githubusercontent.com/abhi-gowdaa/Job-Summary/main/src/assets/salaries.csv', {
+        download: true,  
+        header: true,
+        complete: (results) => {
+          const parsedData = results.data as Csvtype[];
+          console.log('Parsed Data:', parsedData);
           setData(parsedData);
+        },
+        error: (error) => {
+          console.error('Error fetching the CSV:', error);
         },
       });
     };
-    
     fetchCsv();
-  }, [readString]);
-  
+  }, [readRemoteFile]);
 
   const dataSource:DataSource[] = data.map((item, index) => ({
     key: index + 1,
@@ -47,7 +47,8 @@ function App() {
 
   return (
       <>
-        <h2 className='title'>Job Role Summary by Year</h2>
+        <h2 className='title'>Job Role Summary by Year
+        </h2>
         <div className='container'>
         <LineGraph dataSource={dataSource}/>
         <MainTable dataSource={dataSource}/>
